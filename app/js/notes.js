@@ -6,7 +6,9 @@
 
 async function getData() {
   try {
-    const response = await fetch("https://pokeapi.co/api/v2/pokemon/ditto");
+    const response = await fetch(
+      "https://api.nasa.gov/planetary/apod?api_key=ul8UJtZB9tVcNUR2v9fwokows0p7JuQ4atB6G65d&count=10"
+    );
     // gaurd clause
     if (response.status != 200) {
       throw new Error(response);
@@ -16,11 +18,14 @@ async function getData() {
     }
   } catch (error) {
     console.log(error);
-    console.log("sorry could not find that pocket monster");
+    console.log("sorry coudlnt fid that");
   }
 
   // fetch returns a promise (a promise that you'll get something) (like a receipt)
-  const response = await fetch("https://pokeapi.co/api/v2/pokemon/ditto");
+  const response = await fetch(
+    "https://api.nasa.gov/planetary/apod?api_key=ul8UJtZB9tVcNUR2v9fwokows0p7JuQ4atB6G65d&count=10"
+  );
+
   const data = await response.json();
 
   console.log(response);
