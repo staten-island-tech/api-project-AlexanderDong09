@@ -4,6 +4,10 @@
 // ^ will happen before the data is get, which isnt good
 // we use smthn called asyncrhonus or however the hell you spell it (async) function
 
+const DOMSelectors = {
+  container: document.querySelector(".container"),
+};
+
 async function getData() {
   try {
     const response = await fetch(
@@ -28,7 +32,9 @@ async function getData() {
 
   const data = await response.json();
 
-  console.log(response);
+  console.log(response); // if something breaks change to response
+
+  // make the crap appear on the screen later
 }
 
 getData();
