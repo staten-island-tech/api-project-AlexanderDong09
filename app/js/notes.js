@@ -27,7 +27,7 @@ async function getData() {
 
   // fetch returns a promise (a promise that you'll get something) (like a receipt)
   const response = await fetch(
-    "https://api.nasa.gov/planetary/apod?api_key=ul8UJtZB9tVcNUR2v9fwokows0p7JuQ4atB6G65d&count=10"
+    "https://api.nasa.gov/planetary/apod?api_key=ul8UJtZB9tVcNUR2v9fwokows0p7JuQ4atB6G65d&count=2"
   );
 
   const data = await response.json();
@@ -45,9 +45,9 @@ getData();
 function createCards(data) {
   data.forEach((item) => {
     const card = `
-      <div class="card w-[25%] border-[5px] border-black flex flex col">  
+      <div class="card bg-base-100 w-96 shadow-xl">  
           <h2 class="header">${item.title}</h2>
-          <img src="${item.hdurl || "not available, try reloading!"}">
+          <img src="${item.hdurl}">
           <h3>Was APOD on: ${item.date}</h3>
           <h4>Copyright: ${item.copyright || "not available, sorry! :("}</h4>
           <h5>Image Description: ${
