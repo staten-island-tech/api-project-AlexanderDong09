@@ -38,17 +38,21 @@ async function getData() {
   // make the crap appear on the screen later
 }
 
+// find somewhere to add .filter((item) => item.media_type != "video"), you only want photos. ask whalen about it probably
+
 getData();
 
 function createCards(data) {
   data.forEach((item) => {
     const card = `
-      <div class="card">
+      <div class="card w-[25%] border-[5px] border-black flex flex col">   // yo install tailwind later LOL
           <h2 class="header">${item.title}</h2>
-          <img src="${item.hdurl}">
+          <img src="${item.hdurl || "not available, try reloading!"}">
           <h3>Was APOD on: ${item.date}</h3>
-          <h4>Copyright: ${item.copyright}</h4>
-          <h5>Image Description: ${item.explanation}</h5>
+          <h4>Copyright: ${item.copyright || "not available, sorry! :("}</h4>
+          <h5>Image Description: ${
+            item.explanation || "Not available, sorry!"
+          }</h5>
       </div>
     `;
 
