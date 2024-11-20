@@ -45,7 +45,7 @@ getData();
 function createCards(data) {
   data.forEach((item) => {
     const card = `
-      <div class="card w-[25%] border-[5px] border-black flex flex col">   // yo install tailwind later LOL
+      <div class="card w-[25%] border-[5px] border-black flex flex col">  
           <h2 class="header">${item.title}</h2>
           <img src="${item.hdurl || "not available, try reloading!"}">
           <h3>Was APOD on: ${item.date}</h3>
