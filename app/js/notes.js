@@ -38,37 +38,12 @@ async function getData() {
   // make the crap appear on the screen later
 }
 
-// find somewhere to add .filter((item) => item.media_type != "video"), you only want photos. ask whalen about it probably
-
 getData();
 
-function createCards(data) {
+function createImageCards(item) {
   // if video make video card, if image make image
-  if (data.media_type === "video") {
-    data.forEach((item) => {
-      //create video card
-
-      //create image function
-      const card = `
-        <div class="card w-96 bg-base-100 shadow-xl p-10 m-10">  
-            <h2 class="header text-5xl">${item.title}</h2>
-            <video src="${item.hdurl}">
-            <h3>Was APOD on: ${item.date}</h3>
-            <h4>Copyright: ${item.copyright || "not available, sorry! :("}</h4>
-            <h5>Image Description: ${
-              item.explanation || "Not available, sorry!"
-            }</h5>
-        </div>
-      `;
-
-      DOMSelectors.container.insertAdjacentHTML("beforeend", card);
-    });
-  } else {
-    data.forEach((item) => {
-      //create video card
-
-      //create image function
-      const card = `
+  //create image function
+  const card = `
         <div class="card w-96 bg-base-100 shadow-xl p-10 m-10">  
             <h2 class="header text-5xl">${item.title}</h2>
             <img src="${item.hdurl}">
@@ -80,7 +55,36 @@ function createCards(data) {
         </div>
       `;
 
-      DOMSelectors.container.insertAdjacentHTML("beforeend", card);
-    });
-  }
+  DOMSelectors.container.insertAdjacentHTML("beforeend", card);
+}
+
+function createVideoCards(item) {
+  // if video make video card, if image make image
+  //create video function
+  const card = `
+  <div class="card w-96 bg-base-100 shadow-xl p-10 m-10">  
+    <h2 class="header text-5xl">${item.title}</h2>
+    <iframe class="w-full aspect-video" 
+      src="${item.url}" 
+      frameborder="0" 
+      allow="autoplay; clipboard-write; encrypted-media; picture-in-picture" 
+      allowfullscreen>
+    </iframe>
+    <h3>Was APOD on: ${item.date}</h3>
+    <h4>Copyright: ${item.copyright || "not available, sorry! :("}</h4>
+    <h5>Image Description: ${item.explanation || "Not available, sorry!"}</h5>
+  </div>
+  `;
+
+  DOMSelectors.container.insertAdjacentHTML("beforeend", card);
+}
+
+function createCards(data) {
+  data.forEach((item) => {
+    if (item.media_type === "video") {
+      createVideoCards(item);
+    } else {
+      createImageCards(item);
+    }
+  });
 }
