@@ -5,13 +5,16 @@
 // we use smthn called asyncrhonus or however the hell you spell it (async) function
 
 const DOMSelectors = {
+  startDate: document.getElementById("start-date"),
+  endDate: document.getElementById("end-date"),
+  getData: document.getElementById("get-data"),
   container: document.querySelector(".container"),
 };
 
-async function getData() {
+async function getData(startDate, endDate) {
   try {
     const response = await fetch(
-      "https://api.nasa.gov/planetary/apod?api_key=ul8UJtZB9tVcNUR2v9fwokows0p7JuQ4atB6G65d&count=10"
+      `https://api.nasa.gov/planetary/apod?api_key=ul8UJtZB9tVcNUR2v9fwokows0p7JuQ4atB6G65d&start_date=${startDate}&end_date=${endDate}` // fetch returns a promise (a promise that you'll get something) (like a receipt)
     );
     // gaurd clause
     if (response.status != 200) {
@@ -19,36 +22,31 @@ async function getData() {
     } else {
       const data = await response.json();
       console.log(data);
+
+      DOMSelectors.container.innerHTML = "";
+
+      createCards(data);
     }
   } catch (error) {
     console.log(error);
     console.log("sorry coudlnt fid that");
   }
 
-  // fetch returns a promise (a promise that you'll get something) (like a receipt)
-  const response = await fetch(
-    "https://api.nasa.gov/planetary/apod?api_key=ul8UJtZB9tVcNUR2v9fwokows0p7JuQ4atB6G65d&count=5"
-  );
-
-  const data = await response.json();
-
-  console.log(data); // if something breaks change to response
-  createCards(data);
-
-  // make the crap appear on the screen later
+  // const response = await fetch(
+  //   "https://api.nasa.gov/planetary/apod?api_key=ul8UJtZB9tVcNUR2v9fwokows0p7JuQ4atB6G65d&start_date=2024-11-1"
+  // );
 }
 
-getData();
-
 function createImageCards(item) {
-  // if video make video card, if image make image
-  //create image function
+  // when changing the tailwind css for the cards, APPLY IT TO THE VIDEO FUNCTION TOO !!!!!!!!
   const card = `
         <div class="card w-96 bg-base-100 shadow-xl p-10 m-10">  
             <h2 class="header text-5xl">${item.title}</h2>
             <img src="${item.hdurl}">
             <h3>Was APOD on: ${item.date}</h3>
-            <h4>Copyright: ${item.copyright || "not available, sorry! :("}</h4>
+            <h4>Copyright: ${
+              item.copyright || "N/A, public domain image :D"
+            } </h4>
             <h5>Image Description: ${
               item.explanation || "Not available, sorry!"
             }</h5>
@@ -59,8 +57,7 @@ function createImageCards(item) {
 }
 
 function createVideoCards(item) {
-  // if video make video card, if image make image
-  //create video function
+  // used in the off chance that an embedded youtube video DOES appear, as APOD puts that as the picture of the day even though its not a picture, its a video.
   const card = `
   <div class="card w-96 bg-base-100 shadow-xl p-10 m-10">  
     <h2 class="header text-5xl">${item.title}</h2>
@@ -71,7 +68,7 @@ function createVideoCards(item) {
       allowfullscreen>
     </iframe>
     <h3>Was APOD on: ${item.date}</h3>
-    <h4>Copyright: ${item.copyright || "not available, sorry! :("}</h4>
+    <h4>Copyright: ${item.copyright || "N/A, public domain video :D"} </h4>
     <h5>Image Description: ${item.explanation || "Not available, sorry!"}</h5>
   </div>
   `;
@@ -88,3 +85,21 @@ function createCards(data) {
     }
   });
 }
+
+DOMSelectors.getData.addEventListener("click", function () {
+  const startDate = DOMSelectors.startDate.value;
+  const endDate = DOMSelectors.endDate.value;
+
+  if (!endDate) {
+    alert("Please select an end date. It won't work without it ya bum");
+    return;
+  }
+
+  if (new Date(startDate) > new Date(endDate)) {
+    // converts the string from the date inputs into a new Date object, which can be compared
+    alert("Start date must be before end date.");
+    return;
+  }
+
+  getData(startDate, endDate);
+});
