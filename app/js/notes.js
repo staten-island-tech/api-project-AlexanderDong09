@@ -1,17 +1,37 @@
+import { DOMSelectors } from "./dom.js";
+
 //
 // gets data
 // shows the data
 // ^ will happen before the data is get, which isnt good
 // we use smthn called asyncrhonus or however the hell you spell it (async) function
 
-const DOMSelectors = {
-  startDate: document.getElementById("start-date"),
-  endDate: document.getElementById("end-date"),
-  getData: document.getElementById("get-data"),
-  container: document.querySelector(".container"),
-};
+async function getData() {
+  // 2nd api call, getting the data from a specific date
+  try {
+    const response = await fetch(
+      `https://api.nasa.gov/planetary/apod?api_key=ul8UJtZB9tVcNUR2v9fwokows0p7JuQ4atB6G65d&count=5` // fetch returns a promise (a promise that you'll get something) (like a receipt)
+    );
+    // gaurd clause
+    if (response.status != 200) {
+      throw new Error(response);
+    } else {
+      const data = await response.json();
+      console.log(data);
 
-async function getData(startDate, endDate) {
+      DOMSelectors.container.innerHTML = "";
+
+      createCards(data);
+    }
+  } catch (error) {
+    console.log(error);
+    console.log("sorry coudlnt fid that");
+  }
+}
+getData(); // as soon as you load the page, you get five random images
+
+async function searchData(startDate, endDate) {
+  // 2nd api call, getting the data from a specific date
   try {
     const response = await fetch(
       `https://api.nasa.gov/planetary/apod?api_key=ul8UJtZB9tVcNUR2v9fwokows0p7JuQ4atB6G65d&start_date=${startDate}&end_date=${endDate}` // fetch returns a promise (a promise that you'll get something) (like a receipt)
@@ -31,10 +51,6 @@ async function getData(startDate, endDate) {
     console.log(error);
     console.log("sorry coudlnt fid that");
   }
-
-  // const response = await fetch(
-  //   "https://api.nasa.gov/planetary/apod?api_key=ul8UJtZB9tVcNUR2v9fwokows0p7JuQ4atB6G65d&start_date=2024-11-1"
-  // );
 }
 
 function createImageCards(item) {
@@ -86,12 +102,12 @@ function createCards(data) {
   });
 }
 
-DOMSelectors.getData.addEventListener("click", function () {
+DOMSelectors.getDates.addEventListener("click", function () {
   const startDate = DOMSelectors.startDate.value;
   const endDate = DOMSelectors.endDate.value;
 
-  if (!endDate) {
-    alert("Please select an end date. It won't work without it ya bum");
+  if (!startDate) {
+    alert("Please select a start date. It won't work without it ya bum");
     return;
   }
 
@@ -101,5 +117,5 @@ DOMSelectors.getData.addEventListener("click", function () {
     return;
   }
 
-  getData(startDate, endDate);
+  searchData(startDate, endDate);
 });
