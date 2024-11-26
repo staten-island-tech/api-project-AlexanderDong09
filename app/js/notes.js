@@ -10,7 +10,31 @@ async function getData() {
   // 2nd api call, getting the data from a specific date
   try {
     const response = await fetch(
-      `https://api.nasa.gov/planetary/apod?api_key=ul8UJtZB9tVcNUR2v9fwokows0p7JuQ4atB6G65d&count=5` // fetch returns a promise (a promise that you'll get something) (like a receipt)
+      `https://api.nasa.gov/planetary/apod?api_key=ul8UJtZB9tVcNUR2v9fwokows0p7JuQ4atB6G65d` // fetch returns a promise (a promise that you'll get something) (like a receipt)
+    );
+    // gaurd clause
+    if (response.status != 200) {
+      throw new Error(response);
+    } else {
+      const data = await response.json();
+      console.log(data);
+
+      DOMSelectors.container.innerHTML = "";
+
+      createCards([data]);
+    }
+  } catch (error) {
+    console.log(error);
+    console.log("sorry coudlnt fid that");
+  }
+}
+getData(); // as soon as you load the page, you get today's image
+
+async function searchData(startDate, endDate) {
+  // 2nd api call, getting the data from a specific date
+  try {
+    const response = await fetch(
+      `https://api.nasa.gov/planetary/apod?api_key=ul8UJtZB9tVcNUR2v9fwokows0p7JuQ4atB6G65d&start_date=${startDate}&end_date=${endDate}` // fetch returns a promise (a promise that you'll get something) (like a receipt)
     );
     // gaurd clause
     if (response.status != 200) {
@@ -28,13 +52,12 @@ async function getData() {
     console.log("sorry coudlnt fid that");
   }
 }
-getData(); // as soon as you load the page, you get five random images
 
-async function searchData(startDate, endDate) {
+async function getRandomCards(num) {
   // 2nd api call, getting the data from a specific date
   try {
     const response = await fetch(
-      `https://api.nasa.gov/planetary/apod?api_key=ul8UJtZB9tVcNUR2v9fwokows0p7JuQ4atB6G65d&start_date=${startDate}&end_date=${endDate}` // fetch returns a promise (a promise that you'll get something) (like a receipt)
+      `https://api.nasa.gov/planetary/apod?api_key=ul8UJtZB9tVcNUR2v9fwokows0p7JuQ4atB6G65d&count=${num}` // fetch returns a promise (a promise that you'll get something) (like a receipt)
     );
     // gaurd clause
     if (response.status != 200) {
@@ -118,4 +141,11 @@ DOMSelectors.getDates.addEventListener("click", function () {
   }
 
   searchData(startDate, endDate);
+});
+
+DOMSelectors.getNum.addEventListener("click", function () {
+  const num = DOMSelectors.quantityRandom.value;
+
+  console.log(num);
+  getRandomCards(num);
 });

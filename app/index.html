@@ -11,6 +11,7 @@
     <div>
       <h1 class="text-5xl">Randomish Astronomy Photos of the Day!</h1>
     </div>
+
     <div>
     <label for="start-date">Start Date:</label>
     <input type="date" id="start-date">
@@ -19,13 +20,16 @@
     <input type="date" id="end-date">
 
     <button id="get-dates">Submit!</button>
-  </div>
-  <div>
-    <label for="num">Number of random cards!</label>
-    <input type="number" id="quantity" name="quantity" min="1" max="50">
-    <button id="get-num "value="Submit">
-  </div>
-    <div class="container flex flex-wrap flex-row m-5 p-10"></div>
+    </div>
+
+    <div>
+      <label for="num">Number of random cards!</label>
+      <input type="number" id="quantity" name="quantity" min="1" max="100">
+      <button id="get-num" value="Submit">Submit</button>
+    </div>
+
+    <div class="container flex flex-wrap flex-row item-center m-auto p-10"></div>
+
     <script type="module" src="./js/notes.js"></script>
   </body>
 </html>
