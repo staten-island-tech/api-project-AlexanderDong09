@@ -7,10 +7,9 @@ import { DOMSelectors } from "./dom.js";
 // we use smthn called asyncrhonus or however the hell you spell it (async) function
 
 async function getData() {
-  // 2nd api call, getting the data from a specific date
   try {
     const response = await fetch(
-      `https://api.nasa.gov/planetary/apod?api_key=ul8UJtZB9tVcNUR2v9fwokows0p7JuQ4atB6G65d` // fetch returns a promise (a promise that you'll get something) (like a receipt)
+      `https://api.nasa.gov/planetary/apod?api_key=ul8UJtZB9tVcNUR2v9fwokows0p7JuQ4atB6G65d&count=3` // fetch returns a promise (a promise that you'll get something) (like a receipt)
     );
     // gaurd clause
     if (response.status != 200) {
@@ -21,7 +20,7 @@ async function getData() {
 
       DOMSelectors.container.innerHTML = "";
 
-      createCards([data]);
+      createCards(data); // change back to [data]
     }
   } catch (error) {
     console.log(error);
@@ -79,9 +78,11 @@ async function getRandomCards(num) {
 function createImageCards(item) {
   // when changing the tailwind css for the cards, APPLY IT TO THE VIDEO FUNCTION TOO !!!!!!!!
   const card = `
-        <div class="card w-96 bg-base-100 shadow-xl p-10 m-10">  
+        <div class="card bg-slate-300 shadow-xl p-5 rounded-md m-10">  
             <h2 class="header text-5xl">${item.title}</h2>
-            <img src="${item.hdurl}">
+            <img src="${
+              item.hdurl
+            }" class="object-cover w-full h-48 rounded-md mb-3">
             <h3>Was APOD on: ${item.date}</h3>
             <h4>Copyright: ${
               item.copyright || "N/A, public domain image :D"
