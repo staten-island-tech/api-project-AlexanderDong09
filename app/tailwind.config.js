@@ -6,6 +6,8 @@ module.exports = {
       purple: "rgba(87,75,167, 0.50)",
       lightblue: "#717fe1",
       cream: "#fffce9",
+      black: "#020001",
+      green: "#1a6970",
     },
   },
   extend: {},

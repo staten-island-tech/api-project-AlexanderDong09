@@ -6,6 +6,7 @@ const DOMSelectors = {
   getNum: document.getElementById("get-num"),
   container: document.querySelector(".container"),
   learnMore: document.getElementById("learn-more"),
+  modal: document.getElementById("more-info"),
 };
 
 export { DOMSelectors };
