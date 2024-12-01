@@ -85,16 +85,16 @@ function createImageCards(item, index) {
 
   // why is border size inconsistent
   const card = `
-  <div class="card flex-grow basis-1/3 max-w-[23rem] bg-purple p-5 rounded-2xl m-4 flex flex-col items-center justify-center border-[3px] border-lightblue" data-index="${index}">
-    <h2 class="header text-2xl font-bold mb-3 text-lightblue">${item.title}</h2>
+  <div class="card flex-grow basis-1/3 max-w-[23rem] bg-purple p-4 rounded-2xl m-3 flex flex-col items-center justify-center border-[3px] border-lightblue" data-index="${index}">
+    <h2 class="header text-2xl font-bold mb-2 text-cream">${item.title}</h2>
     <img src="${
       item.hdurl
     }" class="w-full h-full rounded-2xl object-contain mb-3 ">
-    <h3 class="text-xl mb-3 text-cream">Was APOD on: ${item.date}</h3>
+    <h3 class="text-xl mb-2 text-cream">Was APOD on: ${item.date}</h3>
     <h4 class="mb-3 text-cream">Copyright: ${
       item.copyright || "N/A, public domain image :D"
     } </h4>
-    <h5 class="hidden text-sm text-cream mb-5">Image Description: ${
+    <h5 class="hidden text-sm text-cream">Image Description: ${
       item.explanation
     }</h5>
     <button class="btn btn-active btn-secondary" id="learn-more">Learn More!!!</button>
@@ -107,17 +107,19 @@ function createImageCards(item, index) {
 function createVideoCards(item, index) {
   // used in the off chance that an embedded youtube video DOES appear, as APOD puts that as the picture of the day even though its not a picture, its a video.
   const card = `
-   <div class="card w-auto h-auto flex-col bg-purple shadow-xl p-10 m-3 border border-solid border-black rounded-lg" data-index="${index}">  
-    <h2 class="header text-2xl font-bold mb-3">${item.title}</h2>
-    <iframe class="w-full h-auto rounded-md object-contain aspect-video" 
+   <div class="card w-auto max-w-4xl h-auto flex-col bg-purple shadow-xl p-4 m-3 border-[3px] border-lightblue rounded-2xl" data-index="${index}">  
+    <h2 class="header text-2xl font-bold mb-2 text-cream">${item.title}</h2>
+    <iframe class="w-auto h-auto  rounded-md object-contain aspect-video" 
       src="${item.url}" 
       frameborder="0" 
       allow="autoplay; clipboard-write; encrypted-media; picture-in-picture" 
       allowfullscreen>
     </iframe>
-    <h3>Was APOD on: ${item.date}</h3>
-    <h4>Copyright: ${item.copyright || "N/A, public domain video :D"} </h4>
-    <h5>Description: ${item.explanation}</h5>
+    <h3 class="text-xl mb-2 text-cream">Was APOD on: ${item.date}</h3>
+    <h4 class="mb-2 text-lg text-cream">Copyright: ${
+      item.copyright || "N/A, public domain image :D"
+    } </h4>
+    <h5 class="text-cream text-sm">Description: ${item.explanation}</h5>
   </div>
   `;
 
@@ -194,6 +196,12 @@ DOMSelectors.getDates.addEventListener("click", function () {
 
 DOMSelectors.getNum.addEventListener("click", function () {
   const num = DOMSelectors.quantityRandom.value;
+
+  if (num <= 0 || !Number.isInteger(parseFloat(num))) {
+    // 2nd one -- parsefloat attempts to take the string "num" and make it into a number, doesn't work if it isnt, and if the number isn't also an integer, it doesnt work
+    alert("please enter an integer that is greater than 0!");
+    return;
+  }
   getRandomCards(num);
 });
 

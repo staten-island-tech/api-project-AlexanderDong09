@@ -3,7 +3,7 @@ module.exports = {
   content: ["./index.html", "./js/main.js", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     colors: {
-      purple: "rgba(87,75,167, 0.50)",
+      purple: "rgba(87,75,167, 0.65)",
       lightblue: "#717fe1",
       cream: "#fffce9",
       black: "#020001",
