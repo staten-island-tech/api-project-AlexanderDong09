@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite App</title>
   </head>
@@ -13,50 +13,45 @@
       <h1 class="text-5xl font-bold text-cream bg-purple border border-lightblue rounded-lg p-4 mb-8 text-center">
         Astronomy Photos of the Day!
       </h1>
-    
+
       <!-- Collapsible Forms Section -->
       <div class="flex flex-col md:flex-row gap-6 w-full max-w-5xl">
-
         <!-- Search by Date -->
-        <div class="border-lightblue bg-purple collapse collapse-arrow border rounded-lg shadow-lg w-full">
+        <div class="border-lightblue bg-purple collapse collapse-arrow border rounded-lg shadow-lg w-full h-min">
           <input type="checkbox" />
-          <div class="collapse-title text-xl font-semibold text-cream">
-            Search by Date
-          </div>
+          <div class="collapse-title text-xl font-semibold text-cream">Search by Date</div>
           <div class="collapse-content">
-              <div class="flex flex-col gap-4 p-4">
-                <div class="flex flex-col sm:flex-row sm:items-center gap-4">
-                  <label for="start-date" class="text-cream font-medium">Start Date:</label>
-                  <input
-                    type="date"
-                    id="start-date"
-                    class="border border-lightblue rounded-lg px-4 py-2 focus:ring-2 focus:ring-purple-400 w-full"
-                  />
-                </div>
-                <div class="flex flex-col sm:flex-row sm:items-center gap-4">
-                  <label for="end-date" class="text-cream font-medium">End Date:</label>
-                  <input
-                    type="date"
-                    id="end-date"
-                    class="border border-lightblue rounded-lg px-4 py-2 focus:ring-2 focus:ring-purple-400 w-full"
-                  />
-                </div>
-                <button
-                  id="get-dates"
-                  class="bg-lightblue text-black font-semibold rounded-lg py-2 hover:bg-lightblue/80 transition duration-300 w-full"
-                >
-                  Submit!
-                </button>
+            <div class="flex flex-col gap-4 p-4">
+              <div class="flex flex-col sm:flex-row sm:items-center gap-4">
+                <label for="start-date" class="text-cream font-medium">Start Date:</label>
+                <input
+                  type="date"
+                  id="start-date"
+                  class="border border-lightblue rounded-lg px-4 py-2 focus:ring-2 focus:ring-purple-400 w-full"
+                />
               </div>
+              <div class="flex flex-col sm:flex-row sm:items-center gap-4">
+                <label for="end-date" class="text-cream font-medium">End Date:</label>
+                <input
+                  type="date"
+                  id="end-date"
+                  class="border border-lightblue rounded-lg px-4 py-2 focus:ring-2 focus:ring-purple-400 w-full"
+                />
+              </div>
+              <button
+                id="get-dates"
+                class="bg-lightblue text-black font-semibold rounded-lg py-2 hover:bg-lightblue/80 transition duration-300 w-full"
+              >
+                Submit!
+              </button>
+            </div>
           </div>
         </div>
-    
+
         <!-- Generate Random Cards -->
-        <div class="collapse collapse-arrow border border-lightblue bg-purple rounded-lg shadow-lg w-full">
+        <div class="collapse collapse-arrow border border-lightblue bg-purple rounded-lg shadow-lg w-full h-min">
           <input type="checkbox" />
-          <div class="collapse-title text-xl font-semibold text-cream">
-            Generate Random Cards
-          </div>
+          <div class="collapse-title text-xl font-semibold text-cream">Generate Random Cards</div>
           <div class="collapse-content">
             <div class="p-4">
               <div class="flex flex-col gap-4">
@@ -86,8 +81,6 @@
     </div>
 
     <div class="container flex flex-wrap justify-center p-5 m-auto min-h-screen"></div>
-  
-  </div>
 
     <script type="module" src="./js/main.js"></script>
   </body>
