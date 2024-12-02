@@ -2,21 +2,19 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="icon" type="image/svg+xml" href="/NASA.svg" />
     <link rel="stylesheet" href="style.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
+    <title>APOD Deluxe!</title>
   </head>
-  <body class="text-center bg-[url(/background.jpg)]">
+  <body class="text-center bg-[url(/background.jpg)] bg-repeat">
     <div class="flex flex-col items-center justify-center bg-gray-100 p-6">
-      <!-- Title -->
       <h1 class="text-5xl font-bold text-cream bg-purple border border-lightblue rounded-lg p-4 mb-8 text-center">
         Astronomy Photos of the Day!
       </h1>
 
-      <!-- Collapsible Forms Section -->
       <div class="flex flex-col md:flex-row gap-6 w-full max-w-5xl">
-        <!-- Search by Date -->
+
         <div class="border-lightblue bg-purple collapse collapse-arrow border rounded-lg shadow-lg w-full h-min">
           <input type="checkbox" />
           <div class="collapse-title text-xl font-semibold text-cream">Search by Date</div>
@@ -48,7 +46,6 @@
           </div>
         </div>
 
-        <!-- Generate Random Cards -->
         <div class="collapse collapse-arrow border border-lightblue bg-purple rounded-lg shadow-lg w-full h-min">
           <input type="checkbox" />
           <div class="collapse-title text-xl font-semibold text-cream">Generate Random Cards</div>
@@ -56,7 +53,7 @@
             <div class="p-4">
               <div class="flex flex-col gap-4">
                 <div class="flex flex-col sm:flex-row sm:items-center gap-4">
-                  <label for="num" class="text-cream font-medium">Number of Cards:</label>
+                  <label for="quantity" class="text-cream font-medium">Number of Cards:</label>
                   <input
                     type="number"
                     id="quantity"
@@ -79,9 +76,11 @@
         </div>
       </div>
     </div>
+    
+ 
+      <div class="container flex flex-wrap justify-center items-center p-5 m-auto max-w-[2000px]"></div>
 
-    <div class="container flex flex-wrap justify-center p-5 m-auto min-h-screen"></div>
-
+    
     <script type="module" src="./js/main.js"></script>
   </body>
 </html>

@@ -87,9 +87,9 @@ function createImageCards(item, index) {
   const card = `
   <div class="card flex-grow basis-1/3 max-w-[23rem] bg-purple p-4 rounded-2xl m-3 flex flex-col items-center justify-center border-[3px] border-lightblue" data-index="${index}">
     <h2 class="header text-2xl font-bold mb-2 text-cream">${item.title}</h2>
-    <img src="${
-      item.hdurl
-    }" class="w-full h-full rounded-2xl object-contain mb-3 ">
+    <img src="${item.hdurl}" alt="${
+    item.title
+  }"class="w-full h-full rounded-2xl object-contain mb-3 ">
     <h3 class="text-xl mb-2 text-cream">Was APOD on: ${item.date}</h3>
     <h4 class="mb-3 text-cream">Copyright: ${
       item.copyright || "N/A, public domain image :D"
@@ -111,6 +111,7 @@ function createVideoCards(item, index) {
     <h2 class="header text-2xl font-bold mb-2 text-cream">${item.title}</h2>
     <iframe class="w-auto h-auto  rounded-md object-contain aspect-video" 
       src="${item.url}" 
+      alt="${item.title}"
       frameborder="0" 
       allow="autoplay; clipboard-write; encrypted-media; picture-in-picture" 
       allowfullscreen>
@@ -138,7 +139,7 @@ function createModal(modalData) {
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
         </svg>
       </button>
-      <h2 class="text-2xl font-bold mb-2">${modalData.title}</h2>
+      <h2 class="text-2xl font-bold mb-2 text-cream">${modalData.title}</h2>
       <img src="${modalData.hdurl}" class=" size-2/4 max-h-96 rounded-lg mb-4 m-auto">
       <p class="text-sm text-cream mb-1">${modalData.explanation}</p>
     </div>
