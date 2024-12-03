@@ -133,7 +133,7 @@ function createModal(modalData) {
     "fixed inset-0 bg-green bg-opacity-25 flex justify-center items-center z-50 opacity-0 transition-opacity duration-100"; // sets the class of the modal so that tailwind can be applied
 
   modal.innerHTML = `
-    <div class="bg-black w-auto max-w-3xl h-auto overflow-auto rounded-lg shadow-lg p-2 relative border-[3px] border-green">
+    <div class="bg-black w-auto max-w-3xl h-auto max-h-[80%]  overflow-auto rounded-lg shadow-lg p-2 relative border-[3px] border-green">
       <button class="btn btn-square btn-outline absolute top-3 right-3" id="close-modal">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
