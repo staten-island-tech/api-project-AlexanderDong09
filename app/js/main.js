@@ -81,11 +81,8 @@ async function getRandomCards(num) {
 }
 
 function createImageCards(item, index) {
-  // when changing the tailwind css for the cards, APPLY IT TO THE VIDEO FUNCTION TOO !!!!!!!!
-
-  // why is border size inconsistent
   const card = `
-  <div class="card flex-grow basis-1/3 max-w-[23rem] bg-purple p-4 rounded-2xl m-3 flex flex-col items-center justify-center border-[3px] border-lightblue" data-index="${index}">
+  <div class="card flex-grow max-w-[80%] md:max-w-[23rem] bg-purple p-4 rounded-2xl m-3 flex flex-col items-center justify-center border-[3px] border-lightblue" data-index="${index}">
     <h2 class="header text-2xl font-bold mb-2 text-cream">${item.title}</h2>
     <img src="${item.hdurl}" alt="${
     item.title
@@ -133,14 +130,14 @@ function createModal(modalData) {
     "fixed inset-0 bg-green bg-opacity-25 flex justify-center items-center z-50 opacity-0 transition-opacity duration-100"; // sets the class of the modal so that tailwind can be applied
 
   modal.innerHTML = `
-    <div class="bg-black w-[60%] h-[80%]  overflow-auto rounded-lg shadow-lg p-2 relative border-[3px] border-green">
-      <button class="btn btn-square btn-outline absolute top-3 right-3" id="close-modal">
+    <div class="bg-black w-[95%] md:w-[75%] h-[80%]  overflow-auto rounded-lg shadow-lg p-2 relative border-[3px] border-green">
+      <button class="btn btn-square btn-outline btn-sm md:btn-md absolute top-2 right-2 md:top-3 md:right-3" id="close-modal">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
         </svg>
       </button>
-      <h2 class="text-2xl font-bold mb-2 text-cream">${modalData.title}</h2>
-      <img src="${modalData.hdurl}" class=" size-10/12 rounded-lg mb-4 m-auto">
+      <h2 class="text-lg md:text-2xl font-bold mb-2 text-cream pt-6 md:pt-4 lg:pt-2">${modalData.title}</h2>
+      <img src="${modalData.hdurl}" class=" size-10/12 h-auto rounded-lg mb-4 m-auto">
       <p class="text-sm text-cream mb-1">${modalData.explanation}</p>
     </div>
   `;
@@ -183,12 +180,16 @@ DOMSelectors.getDates.addEventListener("click", function () {
 
   if (!startDate) {
     alert("Please select a start date. It won't work without it ya bum");
+    DOMSelectors.startDate.value = DOMSelectors.endDate.value = "";
+
     return;
   }
 
   if (new Date(startDate) > new Date(endDate)) {
     // converts the string from the date inputs into a new Date object, which can be compared
     alert("Start date must be before end date.");
+    DOMSelectors.startDate.value = DOMSelectors.endDate.value = "";
+
     return;
   }
 
@@ -201,9 +202,12 @@ DOMSelectors.getNum.addEventListener("click", function () {
   if (num <= 0 || !Number.isInteger(parseFloat(num))) {
     // 2nd one -- parsefloat attempts to take the string "num" and make it into a number, doesn't work if it isnt, and if the number isn't also an integer, it doesnt work
     alert("please enter an integer that is greater than 0!");
+    DOMSelectors.quantityRandom.value = "";
     return;
   }
   getRandomCards(num);
+
+  DOMSelectors.quantityRandom.value = "";
 });
 
 DOMSelectors.container.addEventListener("click", function (event) {
